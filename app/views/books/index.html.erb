@@ -1,0 +1,48 @@
+<div class="container-fluid"> 
+  <p style="color: green"><%= notice %></p>
+    <h3>Search Books</h3>
+    <%= form_tag(books_path, method: 'get') do %>
+      <a>Title</a>
+      <%= text_field_tag(:title, params[:title]) %>
+      <a>Publisher</a>
+      <%= text_field_tag(:publisher, params[:publisher]) %>
+      <a>ISBN</a>
+      <%= text_field_tag(:isbn, params[:isbn]) %>
+      <a>Published Date</a>
+      <%= date_field_tag(:published_date, params[:published_date]) %>
+      <%= submit_tag("Search", name: nil) %>
+    <% end %>
+
+  <h5>Books</h5>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">ISBN</th>
+        <th scope="col">Published Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @records.each do |book| %>
+        <%= content_tag :tr, id: dom_id(book), class: dom_class(book) do%>
+          <td> <%= book.title %> </td>
+          <td> <%= book.publisher %> </td>
+          <td> <%= book.isbn %> </td>
+          <td> <%= book.published_date %> </td>
+          <td>
+            <a>
+              <%= link_to "View/Edit", book %>
+              <%= button_to "Destroy this book", book, method: :delete %>
+            </a>
+          </td>
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%== pagy_bootstrap_combo_nav_js(@pagy) %>
+  <%= link_to "New book", new_book_path %>
+</div>

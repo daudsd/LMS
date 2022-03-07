@@ -1,4 +1,8 @@
 <div class="container-fluid"> 
+    <br/>
+    <%= link_to "Create New book", new_book_path, class: "btn btn-primary btn-sm" %>
+    <br/>
+
   <p style="color: green"><%= notice %></p>
     <h3>Search Books</h3>
     <%= form_tag(books_path, method: 'get') do %>
@@ -10,9 +14,9 @@
       <%= text_field_tag(:isbn, params[:isbn]) %>
       <a>Published Date</a>
       <%= date_field_tag(:published_date, params[:published_date]) %>
-      <%= submit_tag("Search", name: nil) %>
+      <%= submit_tag("Search", name: nil, class: "btn btn-primary btn-sm") %>
     <% end %>
-
+    <br/>
   <h5>Books</h5>
 
   <table class="table">
@@ -34,8 +38,8 @@
           <td> <%= book.published_date %> </td>
           <td>
             <a>
-              <%= link_to "View/Edit", book %>
-              <%= button_to "Destroy this book", book, method: :delete %>
+              <%= link_to "View/Edit", book, class: "btn btn-primary btn-sm" %>
+              <%= button_to "Destroy", book, method: :delete, class: "btn btn-danger btn-sm" %>
             </a>
           </td>
           
@@ -44,5 +48,4 @@
     </tbody>
   </table>
   <%== pagy_bootstrap_combo_nav_js(@pagy) %>
-  <%= link_to "New book", new_book_path %>
 </div>

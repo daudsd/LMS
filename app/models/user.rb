@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
   validates_presence_of :name
   validates_presence_of :email
+
+  def admin?
+    has_role?(:admin)
+  end
+  
+  def student?
+    has_role?(:student)
+  end
 end

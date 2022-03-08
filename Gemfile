@@ -45,8 +45,14 @@ gem 'pagy'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-#create authenticable users with Devise
+# Use Devise to create and authenticate users
 gem 'devise'
+
+# Use cancancan to authorize user
+gem 'cancancan'
+
+# Use Rolify to assign roles to each user
+gem 'rolify'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /books or /books.json
   def index

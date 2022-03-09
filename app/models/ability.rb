@@ -13,7 +13,7 @@ class Ability
     user ||= User.new
     if user.student?
       can :read, :all
-      # can :manage, Product, user_id: user.id
+      can :create, BorrowBook, user_id: user.id
     elsif user.admin?
       can :manage, :all
     else

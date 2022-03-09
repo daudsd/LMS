@@ -2,11 +2,15 @@
 
 class BorrowBooksController < ApplicationController
   before_action :set_borrow_book, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /borrow_books or /borrow_books.json
   def index
-    @pagy, @records = pagy(BorrowBook.admin_search(params)) if current_user.admin?
-    @pagy, @records = pagy(BorrowBook.student_search(params)) if current_user.student?
+    if current_user.admin?
+      @pagy, @records = pagy(BorrowBook.admin_search(params))
+    else
+      @pagy, @records = pagy(BorrowBook.student_search(params))
+    end
   end
 
   # GET /borrow_books/1 or /borrow_books/1.json
@@ -71,8 +75,8 @@ class BorrowBooksController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def borrow_book_params
-    params.require(:borrow_book).permit(:is_returned)
-  end
+  # def borrow_book_params
+  #   params.require(:borrow_book).permit(:is_returned)
+  # end
 
 end

@@ -56,6 +56,7 @@ gem 'rolify'
 
 gem 'jquery-rails'
 gem 'importmap-rails'
+gem 'request_store', '~> 1.1'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

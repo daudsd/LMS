@@ -24,10 +24,11 @@ class BorrowBook < ApplicationRecord
   end
 
   def self.student_search(params)
-    records = BorrowBook.eager_load(:book).all
+    records = BorrowBook.eager_load(:book).where(user_id: RequestStore[:current_user_id]).all
     records = records.where('books.title ILIKE ?', "#{params[:title]}%") if params[:title].present?
     records = records.where(issue_date: params[:issue_date]) if params[:issue_date].present?
     records = records.where(return_date: params[:return_date]) if params[:return_date].present?
+    records = records.where(is_returned: params[:is_returned]) if params[:is_returned].present?
     records.distinct.ordered
   end
 
@@ -51,7 +52,7 @@ class BorrowBook < ApplicationRecord
 
   def set_dates
     self.issue_date = Time.now
-    self.return_date = Time.now.to_date + 15 # 15 days by default
+    # self.return_date = Time.now.to_date + 15 # 15 days by default
     self.is_returned = false
   end
 end

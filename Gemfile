@@ -54,6 +54,8 @@ gem 'cancancan'
 # Use Rolify to assign roles to each user
 gem 'rolify'
 
+gem 'jquery-rails'
+gem 'importmap-rails'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

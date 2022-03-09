@@ -1,9 +1,23 @@
+<%= javascript_tag do %>
+  function borrow_book_fn() {
+    data = { book_id: locals[:book]}
+    fetch(/borrow_book, {
+      method: 'POST',
+      headers:  {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+  };
+<% end %>
+
 <div style="display: flex;" >
   <% if current_user.admin? %>
     <%= link_to "View/Edit", locals[:book], class: "btn btn-primary btn-sm" %>
     <%= button_to "Destroy", locals[:book], method: :delete, class: "btn btn-danger btn-sm" %>
   <% elsif current_user.student? %>
-    <p> Borrow this Books </p>
+    <%= button_to 'Borrow this book', {controller: "borrow_books", action: "create", book_id: locals[:book].id}, :method=>:post, remote: true %>
   <% else %>
     <p> No Actions Available </p>
   <% end %>

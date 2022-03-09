@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Book < ApplicationRecord
   validates_presence_of :title
   validates_presence_of :publisher
@@ -7,13 +9,13 @@ class Book < ApplicationRecord
   scope :ordered, -> { order(created_at: :desc, title: :asc) }
 
   def self.search(params)
-    books = Book.all
-    books = Book.where('title ILIKE ?', "#{params[:title]}%") if params[:title].present?
-    books = Book.where('publisher ILIKE ?', "#{params[:publisher]}%") if params[:publisher].present?
-    books = Book.where(isbn: params[:isbn]) if params[:isbn].present?
-    books = Book.where(published_date: params[:published_date]) if params[:published_date].present?
-    books = Book.where(quantity: params[:quantity]) if params[:quantity].present?
-    books.distinct.ordered
+    records = Book.all
+    records = records.where('title ILIKE ?', "#{params[:title]}%") if params[:title].present?
+    records = records.where('publisher ILIKE ?', "#{params[:publisher]}%") if params[:publisher].present?
+    records = records.where(isbn: params[:isbn]) if params[:isbn].present?
+    records = records.where(published_date: params[:published_date]) if params[:published_date].present?
+    records = records.where(quantity: params[:quantity]) if params[:quantity].present?
+    records.distinct.ordered
   end
 
   private

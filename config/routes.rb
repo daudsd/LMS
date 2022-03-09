@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  resources :borrow_books
   resources :books
 
   get 'home', to: 'pages#home'
@@ -8,4 +10,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
+  post '/borrow_book' => 'borrow_books#create'
 end

@@ -15,6 +15,7 @@ class Ability
       can :read, :all
       can :create, BorrowBook, user_id: user.id
     elsif user.admin?
+      cannot :delete, BorrowBook
       can :manage, :all
     else
       can :read, :all

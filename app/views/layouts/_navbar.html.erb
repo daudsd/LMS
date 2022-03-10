@@ -17,7 +17,11 @@
         </li>
         <% if current_user && current_user.admin? %>
           <li class="nav-item">
-            <%= link_to "Manage Borrowed Books", books_path, class:'nav-link' %>
+            <%= link_to "Manage Borrowed Books", borrow_books_path, class:'nav-link' %>
+          </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Borrowed Books", borrow_books_path, class:'nav-link' %>
           </li>
         <% end %>
       </ul>

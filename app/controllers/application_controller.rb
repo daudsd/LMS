@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  Pagy::DEFAULT[:items] = 10      # items per page
+  Pagy::DEFAULT[:items] = 10    # items per page
   Pagy::DEFAULT[:size]  = [1,4,4,1] # nav bar links
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current_user
-    RequestStore.store[:current_user_id] = current_user.id
+    RequestStore[:current_user] = current_user
   end
 
   #accepting name (additional attribute) for create/update

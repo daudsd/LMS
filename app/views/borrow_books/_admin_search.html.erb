@@ -1,0 +1,43 @@
+<%= form_tag(borrow_books_path, method: 'get') do %>
+  <a>User Name</a>
+  <%= text_field_tag(:name, params[:name]) %>
+  <a>Book Title</a>
+  <%= text_field_tag(:title, params[:title]) %>
+  <a>Issue Date</a>
+  <%= date_field_tag(:issue_date, params[:issue_date]) %>
+  <a>Return Date</a>
+  <%= date_field_tag(:return_date, params[:return_date]) %>
+  <%= submit_tag("Search", name: nil, class: "btn btn-primary btn-sm") %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User Name</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Issue Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |bb| %>
+      <%= content_tag :tr, id: dom_id(bb), class: dom_class(bb) do%>
+        <td> <%= bb.user.name %> </td>
+        <td> <%= bb.book.title %> </td>
+        <td> <%= bb.issue_date %> </td>
+        <td> <%= bb.return_date %> </td>
+        <td>
+          <div style="display: flex;" >
+            <%= link_to "View/Edit", bb, class: "btn btn-primary btn-sm" %>
+            <%= button_to "Accept this book", borrow_book_path(bb.id), params: {:borrow_book => { :id => bb.id }}, method: :put %>
+            <%= button_to "Destroy", bb, method: :delete, class: "btn btn-danger btn-sm" %>
+          </div>
+        </td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <%== pagy_bootstrap_combo_nav_js(@pagy) %>
+</div>

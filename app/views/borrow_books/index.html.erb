@@ -1,44 +1,7 @@
 <div class="container-fluid">
-  
-  
-  <h3>Borrowed books</h3>
-  <%= form_tag(borrow_books_path, method: 'get') do %>
-    <a>Book Title</a>
-    <%= text_field_tag(:title, params[:title]) %>
-    <a>Issue Date</a>
-    <%= date_field_tag(:issue_date, params[:issue_date]) %>
-    <a>Return Date</a>
-    <%= date_field_tag(:return_date, params[:return_date]) %>
-    <a>Returned</a>
-    <%= check_box_tag(:is_returned, params[:is_returned]) %>
-    <%= submit_tag("Search", name: nil, class: "btn btn-primary btn-sm") %>
+  <% if current_user.admin? %>
+    <%= render 'borrow_books/admin_search' %>
+  <% else %>
+    <%= render 'borrow_books/user_search' %>
   <% end %>
-
-</div>
-
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Book Title</th>
-        <th scope="col">Issue Date</th>
-        <th scope="col">Return Date</th>
-        <th scope="col">Returned</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @records.each do |bb| %>
-        <%= content_tag :tr, id: dom_id(bb), class: dom_class(bb) do%>
-          <td> <%= bb.book.title %> </td>
-          <td> <%= bb.issue_date %> </td>
-          <td> <%= bb.return_date %> </td>
-          <td> <%= bb.is_returned %> </td>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-center">
-    <%== pagy_bootstrap_combo_nav_js(@pagy) %>
-  </div>
 </div>

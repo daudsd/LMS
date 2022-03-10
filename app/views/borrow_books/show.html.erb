@@ -1,10 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @borrow_book %>
+<%= render "form", borrow_book: @borrow_book %>
 
 <div>
-  <%= link_to "Edit this borrow book", edit_borrow_book_path(@borrow_book) %> |
   <%= link_to "Back to borrow books", borrow_books_path %>
-
-  <%= button_to "Destroy this borrow book", @borrow_book, method: :delete %>
 </div>

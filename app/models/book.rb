@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   validates_presence_of :title
   validates_presence_of :publisher
 
-  before_validation :set_data, unless: -> { published_date.present? }
+  before_validation :set_data
 
   scope :ordered, -> { order(created_at: :desc, title: :asc) }
 

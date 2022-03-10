@@ -75,8 +75,8 @@ class BorrowBooksController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  # def borrow_book_params
-  #   params.require(:borrow_book).permit(:is_returned)
-  # end
+  def borrow_book_params
+    params.require(:borrow_book).permit(:id)
+  end
 
 end

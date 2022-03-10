@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :email
 
-  after_create :assign_role
+  after_create :assign_default_role
 
   def admin?
     has_role?(:admin)
@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   private
 
-  def assign_role
+  def assign_default_role
     add_role :student
   end
 end

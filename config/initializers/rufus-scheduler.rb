@@ -2,11 +2,11 @@ require 'rufus/scheduler'
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.every '10s' do
-  print "daud"
+scheduler.cron '0 23 * * *' do
+  #run this everyday at 23 pm..
+  BorrowBook.task_calculate_fine_for_borrowed_books
 end
 
-# scheduler.cron '0 22 * * 1-5' do
-#   # every day of the week at 22:00 (10pm)
-#   puts 'activate security system'
+# scheduler.every '24h' do
+#   print 'activate security system'
 # end

@@ -57,6 +57,7 @@ gem 'rolify'
 gem 'jquery-rails'
 gem 'importmap-rails'
 gem 'request_store', '~> 1.1'
+gem 'rufus-scheduler'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

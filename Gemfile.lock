@@ -98,7 +98,12 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
+    et-orbi (1.2.7)
+      tzinfo
     ffi (1.15.5-x64-mingw-ucrt)
+    fugit (1.5.2)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -277,6 +282,7 @@ DEPENDENCIES
   request_store (~> 1.1)
   rolify
   rspec-rails
+  rufus-scheduler
   selenium-webdriver
   spring
   sprockets-rails

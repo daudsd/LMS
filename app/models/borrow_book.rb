@@ -21,6 +21,7 @@ class BorrowBook < ApplicationRecord
     records = records.where('books.title ILIKE ?', "#{params[:title]}%") if params[:title].present?
     records = records.where(issue_date: params[:issue_date]) if params[:issue_date].present?
     records = records.where(return_date: params[:return_date]) if params[:return_date].present?
+    records = records.where(fine: params[:fine]) if params[:fine].present?
     records.distinct.ordered
   end
 
@@ -29,7 +30,12 @@ class BorrowBook < ApplicationRecord
     records = records.where('books.title ILIKE ?', "#{params[:title]}%") if params[:title].present?
     records = records.where(issue_date: params[:issue_date]) if params[:issue_date].present?
     records = records.where(return_date: params[:return_date]) if params[:return_date].present?
+    records = records.where(fine: params[:fine]) if params[:fine].present?
     records.distinct.ordered
+  end
+
+  def self.task_calculate_fine_for_borrowed_books
+    BorrowBook.where(is_returned: false).update_all('fine = (select case when (current_date - issue_date) > 15 then ((current_date - issue_date) - 15) * 20 else 0 end as calculated_fine from borrow_books bb where bb.id = borrow_books.id)')
   end
 
   private

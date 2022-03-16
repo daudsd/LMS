@@ -7,6 +7,8 @@
   <%= date_field_tag(:issue_date, params[:issue_date]) %>
   <a>Return Date</a>
   <%= date_field_tag(:return_date, params[:return_date]) %>
+  <a>Fine</a>
+  <%= date_field_tag(:fine, params[:fine]) %>
   <%= submit_tag("Search", name: nil, class: "btn btn-primary btn-sm") %>
 <% end %>
 
@@ -17,6 +19,7 @@
       <th scope="col">Book Title</th>
       <th scope="col">Issue Date</th>
       <th scope="col">Return Date</th>
+      <th scope="col">Fine</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -27,6 +30,7 @@
         <td> <%= bb.book.title %> </td>
         <td> <%= bb.issue_date %> </td>
         <td> <%= bb.return_date %> </td>
+        <td> <%= bb.fine %> </td>
         <td>
           <div style="display: flex;" >
             <%= link_to "View/Edit", bb, class: "btn btn-primary btn-sm" %>
